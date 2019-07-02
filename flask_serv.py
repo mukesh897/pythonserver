@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, abort, jsonify
 from flask_cors import CORS
+import json
 app = Flask(__name__, static_folder="public",
 template_folder="public")
 CORS(app)
@@ -16,11 +17,8 @@ def create_task():
     if not request.json or not 'username' in request.json:
         abort(400)
     tasks = []
-    task = {
-            'username': request.json['username'],
-    }
-    tasks.append(task)
-    return jsonify({'task': 'task'}, 201)
+    username = request.json['username']
+    return jsonify({'message': 'successfully updated', 'username_received': username})
 
 if __name__ == '__main__':
     app.run(debug=True)
